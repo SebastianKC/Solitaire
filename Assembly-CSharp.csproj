@@ -63,9 +63,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Solitaire.cs" />
-    <Compile Include="Assets\UpdateSprite.cs" />
-    <Compile Include="Assets\UserInput.cs" />
+    <Compile Include="Assets\Scripts\Solitaire.cs" />
+    <Compile Include="Assets\Scripts\UpdateSprite.cs" />
+    <Compile Include="Assets\Scripts\UserInput.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Repositories/Solitaire/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
