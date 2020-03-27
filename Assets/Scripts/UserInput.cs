@@ -79,20 +79,29 @@ public class UserInput : MonoBehaviour
         // If there is no card currently selected
         // Select the card
 
-        if (slot1 = this.gameObject) // Not null because we pass in this gameObject instead
+        if (slot1 == this.gameObject) // Not null because we pass in this gameObject instead
         {
             slot1 = selected;
         }
 
-            // If there is already a card selected (and it is not the same card)
-                // If the new card is eligible to stack on the old card
-                    // Stack it
-                // Else
-                    // Select the new card
+        // If there is already a card selected (and it is not the same card)
+        else if (slot1 != selected)
+        {
+            // If the new card is eligible to stack on the old card
+            if (Stackable(selected))
+            {
+                // Stack it
+            }
+            else
+            {
+                // Select the new card
+                slot1 = selected;
+            }
+        }
 
-            // Else if there is already a card selected and it is the same card
-                // If the time is short enough then it is a double click
-                    // If the card is eligible to fly up to the top then do it
+        // Else if there is already a card selected and it is the same card
+        // If the time is short enough then it is a double click
+        // If the card is eligible to fly up to the top then do it
     }
 
     void Top()
@@ -105,5 +114,57 @@ public class UserInput : MonoBehaviour
     {
         // Bottom click actions
         print("Clicked on bottom");
+    }
+
+    bool Stackable(GameObject selected)
+    {
+        Selectable s1 = slot1.GetComponent<Selectable>();
+        Selectable s2 = selected.GetComponent<Selectable>();
+        // Compare them to see if they stack
+        
+        if (s2.top) // If in the top pile, must stack suited Ace to King
+        {
+            if (s1.suit == s2.suit || (s1.value == 1 && s2.suit == null))
+            {
+                if (s1.value == s2.value + 1)
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else // If in the bottom pile, must stack alternate colours King to Ace
+        {
+            if (s1.value == s2.value - 1)
+            {
+                bool card1Red = true;
+                bool card2Red = true;
+
+                if (s1.suit == "C" || s1.suit == "S")
+                {
+                    card1Red = false;
+                }
+
+                if (s2.suit == "C" || s2.suit == "S")
+                {
+                    card2Red = false;
+                }
+
+                if (card1Red == card2Red)
+                {
+                    print("Not stackable");
+                    return false;
+                }
+                else
+                {
+                    print("Stackable");
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

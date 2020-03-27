@@ -56,7 +56,7 @@ public class Solitaire : MonoBehaviour
         deck = GenerateDeck();
         Shuffle(deck);
 
-        // Print the card names for debugging
+        // Log the cards in the deck
         foreach (string card in deck)
         {
             print(card);
@@ -116,8 +116,12 @@ public class Solitaire : MonoBehaviour
                 yield return new WaitForSeconds(0.05f);
 
                 // Card's location
-                GameObject newCard = Instantiate(cardPrefab, new Vector3(bottomPos[i].transform.position.x, bottomPos[i].transform.position.y - yOffset, bottomPos[i].transform.position.z - zOffset), Quaternion.identity, bottomPos[i].transform);
+                GameObject newCard = Instantiate(cardPrefab, new Vector3(bottomPos[i].transform.position.x,
+                                                                         bottomPos[i].transform.position.y - yOffset,
+                                                                         bottomPos[i].transform.position.z - zOffset),
+                                                                         Quaternion.identity, bottomPos[i].transform);
                 newCard.name = card;
+                newCard.GetComponent<Selectable>().row = i;
 
                 // Tells the bottom card of each column to be face up
                 if (card == bottoms[i][bottoms[i].Count -1])
@@ -126,8 +130,8 @@ public class Solitaire : MonoBehaviour
                 }
 
                 // Each new card's offset on the board
-                yOffset = yOffset + 0.3f;
-                zOffset = zOffset + 0.03f;
+                yOffset += 0.3f;
+                zOffset += 0.03f;
                 discardPile.Add(card);
             }
         }
@@ -172,7 +176,7 @@ public class Solitaire : MonoBehaviour
                 myTrips.Add(deck[j + modifier]);
             }
             deckTrips.Add(myTrips);
-            modifier = modifier + 3;
+            modifier += 3;
         }
         // If less than 3 cards remain
         if (tripsRemainder != 0)
@@ -215,11 +219,12 @@ public class Solitaire : MonoBehaviour
             foreach (string card in deckTrips[deckLocation])
             {
                 GameObject newTopCard = Instantiate(cardPrefab, new Vector3(deckButton.transform.position.x + xOffset, deckButton.transform.position.y, deckButton.transform.position.z + zOffset), Quaternion.identity, deckButton.transform);
-                xOffset = xOffset + 0.5f;
-                zOffset = zOffset - 0.2f;
+                xOffset += 0.5f;
+                zOffset -= 0.2f;
                 newTopCard.name = card;
                 tripsOnDisplay.Add(card);
                 newTopCard.GetComponent<Selectable>().faceUp = true;
+                newTopCard.GetComponent<Selectable>().inDeckPile = true;
             }
             deckLocation++;
         }
