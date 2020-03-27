@@ -9,6 +9,7 @@ public class UpdateSprite : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Selectable selectable;
     private Solitaire solitaire;
+    private UserInput userInput;
 
     // Start is called before the first frame update
     void Start()
@@ -16,6 +17,7 @@ public class UpdateSprite : MonoBehaviour
         // Initiate list of cards (deck)
         List<string> deck = Solitaire.GenerateDeck();
         solitaire = FindObjectOfType<Solitaire>();
+        userInput = FindObjectOfType<UserInput>();
 
         // Iterate through cards
         int i = 0;
@@ -45,6 +47,18 @@ public class UpdateSprite : MonoBehaviour
         else
         {
             spriteRenderer.sprite = cardBack;
+        }
+
+        if (userInput.slot1)
+        {
+            if (name == userInput.slot1.name)
+            {
+                spriteRenderer.color = Color.yellow;
+            }
+            else
+            {
+                spriteRenderer.color = Color.white;
+            }
         }
     }
 }

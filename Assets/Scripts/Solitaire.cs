@@ -56,7 +56,7 @@ public class Solitaire : MonoBehaviour
         deck = GenerateDeck();
         Shuffle(deck);
 
-        // Print the cards
+        // Print the card names for debugging
         foreach (string card in deck)
         {
             print(card);
