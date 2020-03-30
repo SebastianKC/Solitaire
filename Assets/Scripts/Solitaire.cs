@@ -238,6 +238,7 @@ public class Solitaire : MonoBehaviour
     // Deck restacking method
     void RestackTopDeck()
     {
+        deck.Clear();
         foreach (string card in discardPile)
         {
             deck.Add(card);
