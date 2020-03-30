@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Selectable.cs" />
     <Compile Include="Assets\Scripts\Solitaire.cs" />
+    <Compile Include="Assets\Scripts\UIButtons.cs" />
     <Compile Include="Assets\Scripts\UpdateSprite.cs" />
     <Compile Include="Assets\Scripts\UserInput.cs" />
     <Reference Include="Unity.Timeline.Editor">

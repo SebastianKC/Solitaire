@@ -108,6 +108,7 @@ public class UserInput : MonoBehaviour
                     if (DoubleClick())
                     {
                         // Attempt auto stack
+                        AutoStack(selected);
                     }
                 }
                 else
@@ -141,6 +142,7 @@ public class UserInput : MonoBehaviour
                 if (DoubleClick())
                 {
                     // Attempt auto stack
+                    AutoStack(selected);
                 }
             }
         }
@@ -327,7 +329,7 @@ public class UserInput : MonoBehaviour
 
     void AutoStack(GameObject selected)
     {
-        for (int i = 0; 9 < solitaire.topPos.Length; i++)
+        for (int i = 0; i < solitaire.topPos.Length; i++)
         {
             Selectable stack = solitaire.topPos[i].GetComponent<Selectable>();
             if (selected.GetComponent<Selectable>().value == 1) //  If it is an Ace
@@ -345,31 +347,50 @@ public class UserInput : MonoBehaviour
                     (solitaire.topPos[i].GetComponent<Selectable>().value == slot1.GetComponent<Selectable>().value - 1))
                 {
                     // If it is the last card (if it has no children)
-                    slot1 = selected;
-
-                    // Find a top spot that matches the conditions for auto stacking if it exists
-                    string lastCardName = stack.suit + stack.value.ToString();
-                    if (stack.value == 1)
+                    if (HasNoChildren(slot1))
                     {
-                        lastCardName = stack.suit + "A";
+                        slot1 = selected;
+                        // Find a top spot that matches the conditions for auto stacking if it exists
+                        string lastCardName = stack.suit + stack.value.ToString();
+                        if (stack.value == 1)
+                        {
+                            lastCardName = stack.suit + "A";
+                        }
+                        if (stack.value == 11)
+                        {
+                            lastCardName = stack.suit + "J";
+                        }
+                        if (stack.value == 12)
+                        {
+                            lastCardName = stack.suit + "Q";
+                        }
+                        if (stack.value == 13)
+                        {
+                            lastCardName = stack.suit + "K";
+                        }
+                        GameObject lastCard = GameObject.Find(lastCardName);
+                        Stack(lastCard);
+                        break;
                     }
-                    if (stack.value == 11)
-                    {
-                        lastCardName = stack.suit + "J";
-                    }
-                    if (stack.value == 12)
-                    {
-                        lastCardName = stack.suit + "Q";
-                    }
-                    if (stack.value == 13)
-                    {
-                        lastCardName = stack.suit + "K";
-                    }
-                    GameObject lastCard = GameObject.Find(lastCardName);
-                    Stack(lastCard);
-                    break;
                 }
             }
+        }
+    }
+
+    bool HasNoChildren(GameObject card)
+    {
+        int i = 0;
+        foreach (Transform child in card.transform)
+        {
+            i++;
+        }
+        if (i == 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 }
