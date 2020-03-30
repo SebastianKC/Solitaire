@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class UIButtons : MonoBehaviour
 {
+    public GameObject highScorePanel;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,6 +16,12 @@ public class UIButtons : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void PlayAgain()
+    {
+        highScorePanel.SetActive(false);
+        ResetScene();
     }
 
     public void ResetScene()
