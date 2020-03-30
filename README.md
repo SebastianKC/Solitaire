@@ -7,5 +7,6 @@ This was created by following a tutorial by [Megalomobile](https://www.youtube.c
 
 
 ## Release 1.0
-Installer: [This executable will install the program wherever you like.](https://drive.google.com/file/d/1Pj_g2nfv2LlJ8JwijcrcqnR330op-7B-/view?usp=sharing)
-Manual install: [Simply unzip the archive and run the exe inside.](https://drive.google.com/file/d/1wLHpJeYZOzCPcI-UTk7wXBvCiNOc_Rir/view?usp=sharing)
+**Installer**: [This executable](https://drive.google.com/file/d/1Pj_g2nfv2LlJ8JwijcrcqnR330op-7B-/view?usp=sharing) will install the program wherever you like.
+
+**Manual install**: Simply unzip the [archive](https://drive.google.com/file/d/1wLHpJeYZOzCPcI-UTk7wXBvCiNOc_Rir/view?usp=sharing) and run the exe inside.
